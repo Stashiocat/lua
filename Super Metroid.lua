@@ -91,6 +91,13 @@ sm.button_X      = 0x40
 sm.button_L      = 0x20
 sm.button_R      = 0x10
 
+-- Enemy projectile properties --
+sm.enemy_projectile_damage                             = 0x0FFF
+sm.enemy_projectile_detect_collisions_with_projectiles = 0x8000
+sm.enemy_projectile_dont_die_on_contact                = 0x4000
+sm.enemy_projectile_disable_collisions_with_samus      = 0x2000
+sm.enemy_projectile_priority                           = 0x1000
+
 -- WRAM --
 sm.getBg1TilemapOptions      = makeReader(0x7E0058, 2)
 sm.getBg2TilemapOptions      = makeReader(0x7E0059, 2)
@@ -270,11 +277,13 @@ sm.getEnemyParameter1              = makeReader(0x7E0FB4, 2, false, 0x40)
 sm.getEnemyParameter2              = makeReader(0x7E0FB6, 2, false, 0x40)
 
 -- Enemy projectiles
-sm.getEnemyProjectileId        = makeReader(0x7E1997, 2, false, 2)
-sm.getEnemyProjectileXPosition = makeReader(0x7E1A4B, 2, false, 2)
-sm.getEnemyProjectileYPosition = makeReader(0x7E1A93, 2, false, 2)
-sm.getEnemyProjectileXRadius   = makeReader(0x7E1BB3, 1, false, 2)
-sm.getEnemyProjectileYRadius   = makeReader(0x7E1BB4, 1, false, 2)
+sm.getEnemyProjectilesEnabled   = makeReader(0x7E198D, 1)
+sm.getEnemyProjectileId         = makeReader(0x7E1997, 2, false, 2)
+sm.getEnemyProjectileXPosition  = makeReader(0x7E1A4B, 2, false, 2)
+sm.getEnemyProjectileYPosition  = makeReader(0x7E1A93, 2, false, 2)
+sm.getEnemyProjectileXRadius    = makeReader(0x7E1BB3, 1, false, 2)
+sm.getEnemyProjectileYRadius    = makeReader(0x7E1BB4, 1, false, 2)
+sm.getEnemyProjectileProperties = makeReader(0x7E1BD7, 2, false, 2)
 
 -- PLMs
 sm.getPlmId           = makeReader(0x7E1C37, 2, false, 2)
