@@ -27,11 +27,11 @@ projCounts = {}
 enemyProjCounts = {}
 
 function getProjectileCellX(proj, camera)
-	return math.floor((proj.x - camera.x) / 32)
+	return math.floor((bit.band(proj.x, 0xFFE0) - bit.band(camera.x, 0xFFE0)) / 32)
 end
 
 function getProjectileCellY(proj, camera)
-	return math.floor((proj.y - camera.y) / 32)
+	return math.floor((bit.band(proj.y, 0xFFE0) - bit.band(camera.y, 0xFFE0)) / 32)
 end
 
 function getProjectileString(proj, camera)
