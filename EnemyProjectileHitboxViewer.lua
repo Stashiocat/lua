@@ -61,8 +61,7 @@ function shouldDraw()
 	local gameState = sm.getGameState()
 	local doorTransitionFunction = sm.getDoorTransitionFunction()
 
-	return
-		   8 <= gameState and gameState < 0xB
+	return 8 <= gameState and gameState < 0xB
 		or 0xC <= gameState and gameState < 0xD
 		or 0x11 <= gameState and gameState < 0x13
 		or 0x2A == gameState
@@ -82,16 +81,16 @@ function displayEnemyHitboxes(camera)
 		local i = n_enemies - j
 		local enemyId = sm.getEnemyId(i)
 		if enemyId ~= 0 then
-		    local enemyXPosition       = sm.getEnemyXPosition(i)
-		    local enemyYPosition       = sm.getEnemyYPosition(i)
-		    local enemyXRadius         = sm.getEnemyXRadius(i)
-		    local enemyYRadius         = sm.getEnemyYRadius(i)
+			local enemyXPosition       = sm.getEnemyXPosition(i)
+			local enemyYPosition       = sm.getEnemyYPosition(i)
+			local enemyXRadius         = sm.getEnemyXRadius(i)
+			local enemyYRadius         = sm.getEnemyYRadius(i)
 			local enemyExtraProperties = sm.getEnemyExtraProperties(i)
 			local enemyProperties      = sm.getEnemyProperties(i)
-		    local left   = enemyXPosition - enemyXRadius - camera.x
-		    local top    = enemyYPosition - enemyYRadius - camera.y
-		    local right  = enemyXPosition + enemyXRadius - camera.x
-		    local bottom = enemyYPosition + enemyYRadius - camera.y
+			local left   = enemyXPosition - enemyXRadius - camera.x
+			local top    = enemyYPosition - enemyYRadius - camera.y
+			local right  = enemyXPosition + enemyXRadius - camera.x
+			local bottom = enemyYPosition + enemyYRadius - camera.y
 			
 			local IsCollisionEnabled = bit.band(enemyProperties, 0x400) == 0
 			
@@ -171,16 +170,16 @@ function displayEnemyProjectileHitboxes(camera)
 		local i = 18 - j
 		local enemyProjectileId = sm.getEnemyProjectileId(i)
 		if enemyProjectileId ~= 0 then
-		    local enemyProjectileXPosition  = sm.getEnemyProjectileXPosition(i)
-		    local enemyProjectileYPosition  = sm.getEnemyProjectileYPosition(i)
-		    local enemyProjectileXRadius    = sm.getEnemyProjectileXRadius(i)
-		    local enemyProjectileYRadius    = sm.getEnemyProjectileYRadius(i)
+			local enemyProjectileXPosition  = sm.getEnemyProjectileXPosition(i)
+			local enemyProjectileYPosition  = sm.getEnemyProjectileYPosition(i)
+			local enemyProjectileXRadius    = sm.getEnemyProjectileXRadius(i)
+			local enemyProjectileYRadius    = sm.getEnemyProjectileYRadius(i)
 			local enemyProjectileProperties = sm.getEnemyProjectileProperties(i)
 			local enemyProjectilesEnabled   = sm.getEnemyProjectilesEnabled() ~= 0
-		    local left   = enemyProjectileXPosition - enemyProjectileXRadius - camera.x
-		    local top    = enemyProjectileYPosition - enemyProjectileYRadius - camera.y
-		    local right  = enemyProjectileXPosition + enemyProjectileXRadius - camera.x
-		    local bottom = enemyProjectileYPosition + enemyProjectileYRadius - camera.y
+			local left   = enemyProjectileXPosition - enemyProjectileXRadius - camera.x
+			local top    = enemyProjectileYPosition - enemyProjectileYRadius - camera.y
+			local right  = enemyProjectileXPosition + enemyProjectileXRadius - camera.x
+			local bottom = enemyProjectileYPosition + enemyProjectileYRadius - camera.y
 
 			local proj = {proj_idx=i, x = enemyProjectileXPosition, y = enemyProjectileYPosition, color = "red"}
 			local cellx = getProjectileCellX(proj, camera)
