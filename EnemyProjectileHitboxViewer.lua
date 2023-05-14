@@ -62,11 +62,11 @@ function shouldDraw()
 	local doorTransitionFunction = sm.getDoorTransitionFunction()
 
 	return
-	       8 <= gameState and gameState < 0xB
-	    or 0xC <= gameState and gameState < 0xD
-	    or 0x11 <= gameState and gameState < 0x13
-	    or 0x2A == gameState
-	    or gameState == 0xB and doorTransitionFunction ~= 0xE36E
+		   8 <= gameState and gameState < 0xB
+		or 0xC <= gameState and gameState < 0xD
+		or 0x11 <= gameState and gameState < 0x13
+		or 0x2A == gameState
+		or gameState == 0xB and doorTransitionFunction ~= 0xE36E
 end
 
 function displayEnemyHitboxes(camera)
@@ -74,24 +74,24 @@ function displayEnemyHitboxes(camera)
 	local n_enemies = sm.getNEnemies()
 	--drawText(0, 0, string.format("n_enemies: %04X", n_enemies), 0xFF00FFFF)
 	if n_enemies == 0 then
-	    return
+		return
 	end
 
 	-- Iterate backwards, I want earlier enemies drawn on top of later ones
 	for j=1,n_enemies do
-	    local i = n_enemies - j
-	    local enemyId = sm.getEnemyId(i)
-	    if enemyId ~= 0 then
-	        local enemyXPosition       = sm.getEnemyXPosition(i)
-	        local enemyYPosition       = sm.getEnemyYPosition(i)
-	        local enemyXRadius         = sm.getEnemyXRadius(i)
-	        local enemyYRadius         = sm.getEnemyYRadius(i)
+		local i = n_enemies - j
+		local enemyId = sm.getEnemyId(i)
+		if enemyId ~= 0 then
+		    local enemyXPosition       = sm.getEnemyXPosition(i)
+		    local enemyYPosition       = sm.getEnemyYPosition(i)
+		    local enemyXRadius         = sm.getEnemyXRadius(i)
+		    local enemyYRadius         = sm.getEnemyYRadius(i)
 			local enemyExtraProperties = sm.getEnemyExtraProperties(i)
 			local enemyProperties      = sm.getEnemyProperties(i)
-	        local left   = enemyXPosition - enemyXRadius - camera.x
-	        local top    = enemyYPosition - enemyYRadius - camera.y
-	        local right  = enemyXPosition + enemyXRadius - camera.x
-	        local bottom = enemyYPosition + enemyYRadius - camera.y
+		    local left   = enemyXPosition - enemyXRadius - camera.x
+		    local top    = enemyYPosition - enemyYRadius - camera.y
+		    local right  = enemyXPosition + enemyXRadius - camera.x
+		    local bottom = enemyYPosition + enemyYRadius - camera.y
 			
 			local IsCollisionEnabled = bit.band(enemyProperties, 0x400) == 0
 			
@@ -160,27 +160,27 @@ function displayEnemyHitboxes(camera)
 					end
 				end
 			end
-	    end
+		end
 	end
 end
 
 function displayEnemyProjectileHitboxes(camera)
 	local y = 0
 	for j=1,18 do
-	    -- Iterate backwards, I want earlier enemy projectiles drawn on top of later ones
-	    local i = 18 - j
-	    local enemyProjectileId = sm.getEnemyProjectileId(i)
-	    if enemyProjectileId ~= 0 then
-	        local enemyProjectileXPosition  = sm.getEnemyProjectileXPosition(i)
-	        local enemyProjectileYPosition  = sm.getEnemyProjectileYPosition(i)
-	        local enemyProjectileXRadius    = sm.getEnemyProjectileXRadius(i)
-	        local enemyProjectileYRadius    = sm.getEnemyProjectileYRadius(i)
+		-- Iterate backwards, I want earlier enemy projectiles drawn on top of later ones
+		local i = 18 - j
+		local enemyProjectileId = sm.getEnemyProjectileId(i)
+		if enemyProjectileId ~= 0 then
+		    local enemyProjectileXPosition  = sm.getEnemyProjectileXPosition(i)
+		    local enemyProjectileYPosition  = sm.getEnemyProjectileYPosition(i)
+		    local enemyProjectileXRadius    = sm.getEnemyProjectileXRadius(i)
+		    local enemyProjectileYRadius    = sm.getEnemyProjectileYRadius(i)
 			local enemyProjectileProperties = sm.getEnemyProjectileProperties(i)
 			local enemyProjectilesEnabled   = sm.getEnemyProjectilesEnabled() ~= 0
-	        local left   = enemyProjectileXPosition - enemyProjectileXRadius - camera.x
-	        local top    = enemyProjectileYPosition - enemyProjectileYRadius - camera.y
-	        local right  = enemyProjectileXPosition + enemyProjectileXRadius - camera.x
-	        local bottom = enemyProjectileYPosition + enemyProjectileYRadius - camera.y
+		    local left   = enemyProjectileXPosition - enemyProjectileXRadius - camera.x
+		    local top    = enemyProjectileYPosition - enemyProjectileYRadius - camera.y
+		    local right  = enemyProjectileXPosition + enemyProjectileXRadius - camera.x
+		    local bottom = enemyProjectileYPosition + enemyProjectileYRadius - camera.y
 
 			local proj = {proj_idx=i, x = enemyProjectileXPosition, y = enemyProjectileYPosition, color = "red"}
 			local cellx = getProjectileCellX(proj, camera)
@@ -207,20 +207,20 @@ function displayEnemyProjectileHitboxes(camera)
 				end
 			end
 		
-	    end
+		end
 	end
 end
 
 function displayProjectileHitboxes(camera)
 	for i=0,9 do
-	    local projectileXPosition = sm.getProjectileXPosition(i)
-	    local projectileYPosition = sm.getProjectileYPosition(i)
-	    local projectileXRadius   = sm.getProjectileXRadius(i)
-	    local projectileYRadius   = sm.getProjectileYRadius(i)
-	    local left   = projectileXPosition - projectileXRadius - camera.x
-	    local top    = projectileYPosition - projectileYRadius - camera.y
-	    local right  = projectileXPosition + projectileXRadius - camera.x
-	    local bottom = projectileYPosition + projectileYRadius - camera.y
+		local projectileXPosition = sm.getProjectileXPosition(i)
+		local projectileYPosition = sm.getProjectileYPosition(i)
+		local projectileXRadius   = sm.getProjectileXRadius(i)
+		local projectileYRadius   = sm.getProjectileYRadius(i)
+		local left   = projectileXPosition - projectileXRadius - camera.x
+		local top    = projectileYPosition - projectileYRadius - camera.y
+		local right  = projectileXPosition + projectileXRadius - camera.x
+		local bottom = projectileYPosition + projectileYRadius - camera.y
 
 		local proj = {proj_idx=i, x = projectileXPosition, y = projectileYPosition, color = "yellow"}
 		local cellx = getProjectileCellX(proj, camera)
