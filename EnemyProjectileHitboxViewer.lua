@@ -19,6 +19,7 @@ shouldShowDisabledCollisions = false
 shouldShowEmptyGridCells = false
 shouldDisplayProjectileList = false
 shouldDisplayProjectileHitbox = true
+shouldIgnoreHitboxesThatCantCollideWithSamus = false
 shouldShowEnemyHitbox = true
 
 -- Globals
@@ -188,7 +189,11 @@ function displayEnemyProjectileHitboxes(camera)
 			local hash = cellx*10 + celly
 			if enemyProjCounts[hash] ~= nil then
 				local bHasCollisions = bit.band(enemyProjectileProperties, sm.enemy_projectile_detect_collisions_with_projectiles) ~= 0
-				bHasCollisions = bHasCollisions and bit.band(enemyProjectileProperties, sm.enemy_projectile_disable_collisions_with_samus) == 0
+				
+				if shouldIgnoreHitboxesThatCantCollideWithSamus then
+					bHasCollisions = bHasCollisions and bit.band(enemyProjectileProperties, sm.enemy_projectile_disable_collisions_with_samus) == 0
+				end
+				
 				if shouldShowDisabledCollisions or bHasCollisions then
 					enemyProjCounts[hash] = enemyProjCounts[hash] + 1
 					
